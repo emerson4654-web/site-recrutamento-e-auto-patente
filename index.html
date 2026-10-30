@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a12">
+  <title>EB Recrutamento</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">EB</div>
+        <div>
+          <p class="eyebrow">EXÉRCITO BRASILEIRO</p>
+          <h1>Central de Recrutamento</h1>
+        </div>
+      </div>
+      <a class="group-link" id="groupLink" href="https://www.roblox.com/communities/13616747" target="_blank" rel="noreferrer">Abrir grupo <span>↗</span></a>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="status-pill"><span class="status-dot"></span> PAINEL ADMINISTRATIVO</span>
+        <h2>Recrutamento e<br><em>patente automática.</em></h2>
+        <p>Configure uma única patente padrão para o recrutamento pelo jogo e para a verificação automática de novos membros do grupo.</p>
+      </div>
+      <div class="hero-seal" aria-hidden="true"><div class="seal-inner">EB<span>◆</span></div></div>
+    </section>
+
+    <section class="login-card" id="loginCard">
+      <div class="section-heading">
+        <div><span class="eyebrow">ACESSO RESTRITO</span><h3>Entrar no painel</h3></div>
+        <span class="lock-icon">⌑</span>
+      </div>
+      <p class="muted">Informe o token administrativo configurado nas variáveis do Render.</p>
+      <form id="loginForm" class="login-form">
+        <label for="adminToken">Token administrativo</label>
+        <div class="input-row"><input id="adminToken" type="password" autocomplete="current-password" placeholder="Cole seu ADMIN_TOKEN" required><button class="primary-button" type="submit">Entrar <span>→</span></button></div>
+      </form>
+      <p class="feedback" id="loginFeedback" role="status"></p>
+    </section>
+
+    <section id="dashboard" class="dashboard hidden">
+      <div class="dashboard-heading">
+        <div><span class="eyebrow">VISÃO GERAL</span><h3>Painel de controle</h3></div>
+        <button id="logoutButton" class="quiet-button" type="button">Sair</button>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card"><span class="stat-label">ID DO GRUPO</span><strong id="groupIdValue">—</strong><small>Grupo conectado</small></article>
+        <article class="stat-card"><span class="stat-label">MEMBROS NA BASE</span><strong id="memberCount">—</strong><small>Associações registradas</small></article>
+        <article class="stat-card"><span class="stat-label">USUÁRIOS PROCESSADOS</span><strong id="processedCount">—</strong><small>Histórico de atribuições</small></article>
+      </div>
+
+      <article class="panel-card config-card">
+        <div class="section-heading">
+          <div><span class="eyebrow">CONFIGURAÇÃO COMPARTILHADA</span><h3>Patente padrão</h3></div>
+          <span class="config-symbol">⚙</span>
+        </div>
+        <p class="muted">Este mesmo ID será usado pelos dois sistemas: recrutamento dentro do jogo e verificação automática de novos membros.</p>
+        <form id="roleForm" class="role-form">
+          <label for="roleId">ID do cargo (Role ID)</label>
+          <div class="input-row"><input id="roleId" inputmode="numeric" pattern="[0-9]+" placeholder="Ex.: 123456789" required><button class="primary-button" type="submit">Salvar patente</button></div>
+        </form>
+        <p class="feedback" id="roleFeedback" role="status"></p>
+        <div class="note"><span>ⓘ</span><p>Use o ID do cargo do grupo, não o número de rank. O servidor valida se o cargo existe antes de salvar.</p></div>
+      </article>
+
+      <article class="panel-card sync-card">
+        <div class="section-heading">
+          <div><span class="eyebrow">VERIFICAÇÃO AUTOMÁTICA</span><h3>Novos membros do grupo</h3></div>
+          <span class="live-label"><span class="status-dot"></span> ATIVO</span>
+        </div>
+        <p class="muted">O servidor verifica o grupo periodicamente e atribui a patente padrão aos novos membros identificados.</p>
+        <div class="sync-info"><div><span class="stat-label">ÚLTIMA VERIFICAÇÃO</span><strong id="lastSync">Ainda não executada</strong></div><button id="syncButton" class="secondary-button" type="button">Verificar agora ↻</button></div>
+        <p class="sync-message" id="syncMessage">A primeira sincronização registra os membros atuais como base e não altera os cargos deles.</p>
+      </article>
+
+      <article class="panel-card log-card">
+        <div class="section-heading"><div><span class="eyebrow">AUDITORIA</span><h3>Histórico recente</h3></div><button id="refreshLogs" class="quiet-button" type="button">Atualizar ↻</button></div>
+        <div id="logsList" class="logs-list"><div class="empty-state">Entre no painel para carregar o histórico.</div></div>
+      </article>
+
+      <div class="warning-box"><strong>Importante sobre o armazenamento</strong><p>O histórico e a lista de membros processados ficam em <code>data.json</code>. No Render, configure um Persistent Disk e use <code>DATA_DIR=/var/data</code> para que esses dados não sejam apagados em reinicializações ou novas publicações.</p></div>
+    </section>
+
+    <footer><span>EB RECRUTAMENTO</span><span>Integração via Roblox Open Cloud</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

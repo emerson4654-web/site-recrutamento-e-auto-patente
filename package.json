@@ -1,0 +1,16 @@
+{
+  "name": "eb-recrutamento",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Painel de recrutamento e atribuição de cargo Roblox para o Exército Brasileiro",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
